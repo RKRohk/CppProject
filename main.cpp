@@ -17,7 +17,6 @@ class Student{
         cin>>rollno;
     }
     void initCredit(){
-	//lol
     	credits[0] =3;
     	credits[1] =3;
     	credits[2] =3;
@@ -62,7 +61,7 @@ class Student{
 		cin>>endterm;
 	}
 	catch (float x){  
-	        cout << "Caught ";   
+	        cout << "Incorrect Range of marks Entered!";   
 	        }
 	return midterm+labfile+endterm+viva;
     }
