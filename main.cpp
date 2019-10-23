@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<iomanip> 
 using namespace std;
 class Student{
     protected:
@@ -30,20 +31,20 @@ class Student{
     	cout<<"Enter Marks as defined:"<<endl;
     	cout<<"Probability and Statistics: "<<endl;
     	marks[0]=getMarks();
-    	/*cout<<"Discrete Mathematics: "<<endl;
+    	cout<<"Discrete Mathematics: "<<endl;
     	marks[1]=getMarks();
     	cout<<"Economics: "<<endl;
     	marks[2]=getMarks();
     	cout<<"Object Oriented Programming: "<<endl;
     	marks[3]=getMarks();
-    	cout<<"Object Oriented Programming Lab:"<<endl;
-    	marks[4]=getLab();
     	cout<<"Data Structures and Analysis: "<<endl;
     	marks[5]=getMarks();
+    	cout<<"Principle Of Digital Communication: "<<endl;
+    	marks[7]=getMarks();
     	cout<<"Data Structures and Analysis Lab:"<<endl;
     	marks[6]=getLab();
-    	cout<<"Principle Of Digital Communication: "<<endl;
-    	marks[7]=getMarks();*/
+    	cout<<"Object Oriented Programming Lab:"<<endl;
+    	marks[4]=getLab();
     }
     float getLab(){
     	float midterm,labfile,viva,endterm;
@@ -74,11 +75,11 @@ class Student{
 		    		throw midsem;
 	    	cout<<"Enter Internal Marks: ";
 	    	cin>>internal;
-	      	if(internal>20 || internal<0 )
+	      	if(internal>30 || internal<0 )
 		    		throw internal;
 	    	cout<<"Enter EndSem Marks: ";
 	    	cin>>endsem;
-	    	if(endsem>20 || endsem<0 )
+	    	if(endsem>50 || endsem<0 )
 		    		throw endsem;
 	    	tot = midsem + internal + endsem;
 	    	}
@@ -91,8 +92,8 @@ class Student{
     }
     void calcSgpa(){
         //TODO I really don't know how to calculate sgpa. HALP!
-        float totcr,obcr;
-        
+        float obcr=0;    
+        int totcr=0;
 	for(int i = 0;i<8;i++)
 		totcr+=credits[i];
 	for(int i =0;i<8;i++){
@@ -100,9 +101,11 @@ class Student{
 			grade[i]=10;
 		else
 			grade[i]=(marks[i]/10)+1;
-		obcr+=grade[i];
+		obcr+=grade[i]*credits[i];
 		}
-	
+	//cout<<"\n"<<obcr<<"\n";
+	//cout<<"\n"<<totcr<<"\n";
+	sgpa=obcr/totcr;
     }
     void calcCgpa(){
         cgpa = (cgpa*2 + sgpa)/3.0;
@@ -110,10 +113,12 @@ class Student{
     void show(){
         cout<<"Name: "<<name<<endl;
         cout<<"Roll No."<<rollno<<endl;
-        cout<<"Marks: "<<marks[0]<<endl;
-        cout<<"Grade: "<<grade[0]<<endl;
-        //for(int i = 0;i<8;i++)
-        //	cout<<"Marks: "<<marks[i]<<endl;
+        for(int i = 0;i<8;i++){
+        	cout<<"Marks: "<<marks[i]<<endl;
+	        cout<<"Grade: "<<grade[i]<<endl;
+	        cout<<"\n";
+	        }
+	cout<<"SGPA = "<<fixed<<setprecision(2)<<sgpa<<endl;
     }
 };
 int main(){
@@ -121,6 +126,7 @@ int main(){
     while (ch==1)
     {
         Student s;
+        s.initCredit();
         s.getInfo();
         s.initMarks();
         s.calcSgpa();
