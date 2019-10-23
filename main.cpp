@@ -47,26 +47,47 @@ class Student{
     }
     float getLab(){
     	float midterm,labfile,viva,endterm;
-    	cout<<"Enter Midsem Marks: ";
-    	cin>>midterm;
-    	cout<<"Enter Lab File Marks: ";
-    	cin>>labfile;
-    	cout<<"Enter Viva Marks: ";
-    	cin>>viva;
-	cout<<"Enter Lab Exam Marks: ";    
-	cin>>endterm;
+    	try{
+	    	cout<<"Enter Midsem Marks: ";
+	    	cin>>midterm;
+	    	if(midterm>20 || midterm <0 )
+	    		throw midterm;
+	    	cout<<"Enter Lab File Marks: ";
+	    	cin>>labfile;
+	    	cout<<"Enter Viva Marks: ";
+	    	cin>>viva;
+		cout<<"Enter Lab Exam Marks: ";    
+		cin>>endterm;
+	}
+	catch (float x){  
+	        cout << "Caught ";   
+	        }
 	return midterm+labfile+endterm+viva;
     }
     float getMarks(){
     	float midsem,internal,endsem,tot;
-    	cout<<"Enter Midsem Marks: ";
-    	cin>>midsem;
-    	cout<<"Enter Internal Marks: ";
-    	cin>>internal;
-    	cout<<"Enter EndSem Marks: ";
-    	cin>>endsem;
-    	tot = midsem + internal + endsem;
+    	try{
+    		jump:
+	    	cout<<"Enter Midsem Marks: ";
+	    	cin>>midsem;
+	    	if(midsem>20 || midsem <0 )
+		    		throw midsem;
+	    	cout<<"Enter Internal Marks: ";
+	    	cin>>internal;
+	      	if(internal>20 || internal<0 )
+		    		throw internal;
+	    	cout<<"Enter EndSem Marks: ";
+	    	cin>>endsem;
+	    	if(endsem>20 || endsem<0 )
+		    		throw endsem;
+	    	tot = midsem + internal + endsem;
+	    	}
+	catch (float x)  {
+	        cout << "Incorrect Range of marks Entered! "<<endl;
+	        //This catch block breaks input operation..goto doesnt work , need to find solution.
+	        }
     	return tot;
+    	
     }
     void calcSgpa(){
         //TODO I really don't know how to calculate sgpa. HALP!
@@ -106,6 +127,7 @@ int main(){
         s.show();
         cout<<"Want to enter more data? 1/0"<<endl;
         cin>>ch;
-    }    
+    } 
+
     return 0;
 }
