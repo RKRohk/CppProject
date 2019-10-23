@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<iomanip> 
 using namespace std;
 class Student{
     protected:
@@ -102,8 +103,8 @@ class Student{
 			grade[i]=(marks[i]/10)+1;
 		obcr+=grade[i]*credits[i];
 		}
-	cout<<"\n"<<obcr<<"\n";
-	cout<<"\n"<<totcr<<"\n";
+	//cout<<"\n"<<obcr<<"\n";
+	//cout<<"\n"<<totcr<<"\n";
 	sgpa=obcr/totcr;
     }
     void calcCgpa(){
@@ -117,7 +118,7 @@ class Student{
 	        cout<<"Grade: "<<grade[i]<<endl;
 	        cout<<"\n";
 	        }
-	cout<<"SGPA = "<<sgpa<<endl;
+	cout<<"SGPA = "<<fixed<<setprecision(2)<<sgpa<<endl;
     }
 };
 int main(){
