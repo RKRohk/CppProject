@@ -5,7 +5,8 @@
 using namespace std;
 class Student{
     protected:
-    string name,subject[9] = {"Probability and Statistics","Discrete Mathematics","Economics","Object Oriented Programming","Object Oriented Programming Lab","Data Structures and Algorithms","Data Structures and Algorithms lab","Principle of Digital Communication"};
+    char name[20];
+    string subject[8] = {"Probability and Statistics","Discrete Mathematics","Economics","Object Oriented Programming","Object Oriented Programming Lab","Data Structures and Algorithms","Data Structures and Algorithms lab","Principle of Digital Communication"};
     float sgpa,cgpa,marks[8];
     int rollno,credits[8],grade[8];
     public:
@@ -120,9 +121,28 @@ class Student{
 	        }
 	cout<<"SGPA = "<<fixed<<setprecision(2)<<sgpa<<endl;
     }
+    friend void addToFile(const Student &);
+    friend void readFromFile();
 };
+void addToFile(const Student &s){
+    ofstream outFile("Student.json",ios::app | ios::binary);
+    outFile.write((char *)& s, sizeof(s));
+    outFile.close();
+}
+void readFromFile(){
+    Student s;
+    ifstream inFile("Student.json",ios::in | ios::binary);
+    while (inFile.read((char *)&s,sizeof(s)))
+    {
+        s.show();
+        cout<<endl<<"-----------------------------------"<<endl;
+    }
+    remove("Student.json");
+    inFile.close();
+}
 int main(){
     int ch=1;
+    remove("Student.json");
     while (ch==1)
     {
         Student s;
@@ -131,9 +151,11 @@ int main(){
         s.initMarks();
         s.calcSgpa();
         s.show();
+        addToFile(s);
         cout<<"Want to enter more data? 1/0"<<endl;
         cin>>ch;
     } 
-
+    cout<<"---------------------------"<<endl;
+    readFromFile();
     return 0;
 }
