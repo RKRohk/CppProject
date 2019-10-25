@@ -131,12 +131,9 @@ void readFromFile(){
         cout<<endl<<"-----------------------------------"<<endl;
     }
     inFile.close();
-	remove("Student.json");
-
 }
 int main(){
     int ch=1;
-    remove("Student.json");
     while (ch==1)
     {
         Student s;
