@@ -133,16 +133,31 @@ void readFromFile(){
     inFile.close();
 }
 int main(){
-    int ch=1;
-    while (ch==1)
+    char ch='y';
+	int choice;
+    while (ch!='n')
     {
-        Student s;
-        s.getInfo();
-        s.initMarks();
-        s.calcSgpa();
-        s.show();
-        addToFile(s);
-        cout<<"Want to enter more data? 1/0"<<endl;
+		cout<<"Enter choice\n1-Enter data\n2-Read from file\n";
+		cin>>choice;
+		switch (choice)
+		{
+		case 1:
+		{
+			Student s;
+			s.getInfo();
+			s.initMarks();
+			s.calcSgpa();
+			addToFile(s);
+			break;
+		}
+		case 2:
+			readFromFile();
+			break;
+		default:
+			cout<<"Invalid choice\n";
+			break;
+		}
+        cout<<"Want to enter more data? y/n"<<endl;
         cin>>ch;
     } 
     cout<<"---------------------------"<<endl;
