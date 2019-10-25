@@ -3,10 +3,12 @@
 #include<string>
 #include<iomanip> 
 using namespace std;
+
+string subject[8] = {"Probability and Statistics","Discrete Mathematics","Economics","Object Oriented Programming","Data Structures and Algorithms","Principle of Digital Communication","Data Structures and Algorithms Lab","Object Oriented Programming Lab"};
+
 class Student{
     protected:
     char name[20];
-    string subject[8] = {"Probability and Statistics","Discrete Mathematics","Economics","Object Oriented Programming","Data Structures and Algorithms","Principle of Digital Communication","Data Structures and Algorithms Lab","Object Oriented Programming Lab"};
     int credits[8]={3,3,3,3,4,4,1,1};
     float sgpa,cgpa,marks[8];
     int rollno,grade[8];
@@ -94,7 +96,7 @@ class Student{
     }
     void show(){
 	cout<<setfill('+')<<setw(70)<<""<<"\n";
-	cout<<left<<setfill(' ')<<setw(57)<<"KALINGA INSTITUTE OF INDUSTRIAL TECHNOLOGY"<<"\n";
+	cout<<right<<setfill(' ')<<setw(57)<<"KALINGA INSTITUTE OF INDUSTRIAL TECHNOLOGY"<<"\n";
 	cout<<setfill('-')<<setw(70)<<""<<"\n";
 	cout<<left<<setfill(' ')<<setw(9)<<"Name ";cout<<":";
 	cout<<left<<setfill(' ')<<setw(70)<<name<<endl;
@@ -112,30 +114,29 @@ class Student{
 		cout<<left<<setfill(' ')<<setw(10)<<grade[i]<<endl;
 	        }
 	cout<<setfill('-')<<setw(70)<<""<<"\n";
-	cout<<left<<setfill(' ')<<setw(41)<<"SGPA = "<<fixed<<setprecision(2)<<sgpa<<endl;
+	cout<<right<<setfill(' ')<<setw(38)<<"SGPA = "<<fixed<<setprecision(2)<<sgpa<<endl;
 	cout<<setfill('+')<<setw(70)<<""<<"\n";
     }
     friend void addToFile(const Student &);
     friend void readFromFile();
 };
 void addToFile(const Student &s){
-    ofstream outFile("Student.json",ios::app | ios::binary);
+    ofstream outFile("Student.txt",ios::app | ios::binary);
     outFile.write((char *)& s, sizeof(s));
     outFile.close();
 }
 void readFromFile(){
     Student s;
-    ifstream inFile("Student.json",ios::in | ios::binary);
+    ifstream inFile("Student.txt",ios::in | ios::binary);
     while (inFile.read((char *)&s,sizeof(s)))
     {
         s.show();
-        cout<<endl<<"-----------------------------------"<<endl;
+       cout<<setfill(' ')<<setw(70)<<""<<"\n";
     }
     inFile.close();
-    remove("Student.json");
 }
 int main(){
-    int ch=1;
+    int ch=0;
     while (ch==1)
     {
         Student s;
@@ -147,7 +148,10 @@ int main(){
         cout<<"Want to enter more data? 1/0"<<endl;
         cin>>ch;
     } 
-    cout<<"---------------------------"<<endl;
-    readFromFile();
+   cout<<"\n\n";
+   cout<<right<<setfill(' ')<<setw(46)<<"Printing Records From File"<<"\n";
+   cout<<"\n\n";
+   readFromFile();
+   cout<<right<<setfill(' ')<<setw(43)<<"End Of Records"<<"\n";
     return 0;
 }
