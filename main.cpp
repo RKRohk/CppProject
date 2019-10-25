@@ -106,8 +106,12 @@ class Student{
         cout<<"Name: "<<name<<endl;
         cout<<"Roll No."<<rollno<<endl;
         for(int i = 0;i<8;i++){
+<<<<<<< HEAD
         	cout<<subject[i]<<": "<<endl;
         	cout<<"Marks: "<<marks[i]<<endl;
+=======
+        	cout<<subject[i]<<" "<<"Marks: "<<marks[i]<<endl;
+>>>>>>> upstream/master
 	        cout<<"Grade: "<<grade[i]<<endl;
 	        cout<<"\n";
 	        }
@@ -129,8 +133,9 @@ void readFromFile(){
         s.show();
         cout<<endl<<"-----------------------------------"<<endl;
     }
-    remove("Student.json");
     inFile.close();
+	remove("Student.json");
+
 }
 int main(){
     int ch=1;
