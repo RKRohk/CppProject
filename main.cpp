@@ -6,7 +6,7 @@ using namespace std;
 class Student{
     protected:
     char name[20];
-    string subject[8] = {"Probability and Statistics","Discrete Mathematics","Economics","Object Oriented Programming","Object Oriented Programming Lab","Data Structures and Algorithms","Data Structures and Algorithms lab","Principle of Digital Communication"};
+    string subject[8] = {"Probability and Statistics","Discrete Mathematics","Economics","Object Oriented Programming","Data Structures and Algorithms","Principle of Digital Communication","Data Structures and Algorithms Lab","Object Oriented Programming Lab"};
     float sgpa,cgpa,marks[8];
     int rollno,credits[8],grade[8];
     public:
@@ -28,23 +28,17 @@ class Student{
 
      }
     void initMarks(){
-    	cout<<"Enter Marks as defined:"<<endl;
-    	cout<<"Probability and Statistics: "<<endl;
-    	marks[0]=getMarks();
-    	cout<<"Discrete Mathematics: "<<endl;
-    	marks[1]=getMarks();
-    	cout<<"Economics: "<<endl;
-    	marks[2]=getMarks();
-    	cout<<"Object Oriented Programming: "<<endl;
-    	marks[3]=getMarks();
-    	cout<<"Data Structures and Analysis: "<<endl;
-    	marks[5]=getMarks();
-    	cout<<"Principle Of Digital Communication: "<<endl;
-    	marks[7]=getMarks();
-    	cout<<"Data Structures and Analysis Lab:"<<endl;
-    	marks[6]=getLab();
-    	cout<<"Object Oriented Programming Lab:"<<endl;
-    	marks[4]=getLab();
+    	cout<<"Enter Marks as defined: \n"<<endl;
+    	for(int i=0;i<6;i++){
+	    	cout<<subject[i]<<": "<<"\n"<<endl;
+    		marks[i]=getMarks();
+    		cout<<"\n";
+    	}
+    	for(int i=6;i<8;i++){
+    		cout<<subject[i]<<": "<<"\n"<<endl;
+    		marks[i]=getLab();
+    		cout<<"\n";
+    	}
     }
     float getLab(){
     	float midterm,labfile,viva,endterm;
@@ -103,8 +97,6 @@ class Student{
 			grade[i]=(marks[i]/10)+1;
 		obcr+=grade[i]*credits[i];
 		}
-	/*cout<<"\n"<<obcr<<"\n";
-	cout<<"\n"<<totcr<<"\n"; */
 	sgpa=obcr/totcr;
     }
     void calcCgpa(){
@@ -114,7 +106,12 @@ class Student{
         cout<<"Name: "<<name<<endl;
         cout<<"Roll No."<<rollno<<endl;
         for(int i = 0;i<8;i++){
+<<<<<<< HEAD
+        	cout<<subject[i]<<": "<<endl;
+        	cout<<"Marks: "<<marks[i]<<endl;
+=======
         	cout<<subject[i]<<" "<<"Marks: "<<marks[i]<<endl;
+>>>>>>> upstream/master
 	        cout<<"Grade: "<<grade[i]<<endl;
 	        cout<<"\n";
 	        }
