@@ -7,8 +7,9 @@ class Student{
     protected:
     char name[20];
     string subject[8] = {"Probability and Statistics","Discrete Mathematics","Economics","Object Oriented Programming","Data Structures and Algorithms","Principle of Digital Communication","Data Structures and Algorithms Lab","Object Oriented Programming Lab"};
+    int credits[8]={3,3,3,3,4,4,1,1};
     float sgpa,cgpa,marks[8];
-    int rollno,credits[8],grade[8];
+    int rollno,grade[8];
     public:
     void getInfo(){
         cout<<"Enter name : ";
@@ -16,17 +17,6 @@ class Student{
         cout<<"Enter Roll No. : ";
         cin>>rollno;
     }
-    void initCredit(){
-    	credits[0] =3;
-    	credits[1] =3;
-    	credits[2] =3;
-    	credits[3] =3;
-    	credits[4] =1;
-    	credits[5] =4;
-    	credits[6] =1;
-    	credits[7] =4;
-
-     }
     void initMarks(){
     	cout<<"Enter Marks as defined: \n"<<endl;
     	for(int i=0;i<6;i++){
@@ -103,15 +93,25 @@ class Student{
         cgpa = (cgpa*2 + sgpa)/3.0;
     }
     void show(){
-        cout<<"Name: "<<name<<endl;
-        cout<<"Roll No."<<rollno<<endl;
+	cout<<setfill('+')<<setw(70)<<""<<"\n";
+	cout<<left<<setfill(' ')<<setw(57)<<"KALINGA INSTITUTE OF INDUSTRIAL TECHNOLOGY"<<"\n";
+	cout<<setfill('-')<<setw(70)<<""<<"\n";
+	cout<<left<<setfill(' ')<<setw(9)<<"Name ";cout<<":";
+	cout<<left<<setfill(' ')<<setw(70)<<name<<endl;
+	cout<<left<<setfill(' ')<<setw(10)<<"Roll No. :";
+	cout<<left<<setfill(' ')<<setw(70)<<rollno<<endl;
+	cout<<setfill('-')<<setw(70)<<""<<"\n";
+	cout<<right<<setfill(' ')<<setw(46)<<"Semester Grade Report"<<"\n";
+	cout<<left<<setfill(' ')<<setw(50)<<"  Subject Name:";
+	cout<<left<<setfill(' ')<<setw(10)<<"Marks:";
+	cout<<left<<setfill(' ')<<setw(10)<<"Grade :"<<"\n"<<endl;
         for(int i = 0;i<8;i++){
-        	cout<<subject[i]<<": "<<endl;
-        	cout<<"Marks: "<<marks[i]<<endl;
-        	cout<<subject[i]<<" "<<"Marks: "<<marks[i]<<endl;
-	        cout<<"Grade: "<<grade[i]<<endl;
-	        cout<<"\n";
+        	cout<<"  ";
+        	cout<<left<<setfill(' ')<<setw(50)<<subject[i];
+		cout<<left<<setfill(' ')<<setw(10)<<marks[i];
+		cout<<left<<setfill(' ')<<setw(10)<<grade[i]<<endl;
 	        }
+	cout<<setfill('-')<<setw(70)<<""<<"\n";
 	cout<<"SGPA = "<<fixed<<setprecision(2)<<sgpa<<endl;
     }
     friend void addToFile(const Student &);
@@ -140,7 +140,6 @@ int main(){
     while (ch==1)
     {
         Student s;
-        s.initCredit();
         s.getInfo();
         s.initMarks();
         s.calcSgpa();
