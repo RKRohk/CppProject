@@ -112,7 +112,8 @@ class Student{
 		cout<<left<<setfill(' ')<<setw(10)<<grade[i]<<endl;
 	        }
 	cout<<setfill('-')<<setw(70)<<""<<"\n";
-	cout<<"SGPA = "<<fixed<<setprecision(2)<<sgpa<<endl;
+	cout<<left<<setfill(' ')<<setw(41)<<"SGPA = "<<fixed<<setprecision(2)<<sgpa<<endl;
+	cout<<setfill('+')<<setw(70)<<""<<"\n";
     }
     friend void addToFile(const Student &);
     friend void readFromFile();
@@ -131,33 +132,19 @@ void readFromFile(){
         cout<<endl<<"-----------------------------------"<<endl;
     }
     inFile.close();
+    remove("Student.json");
 }
 int main(){
-    char ch='y';
-	int choice;
-    while (ch!='n')
+    int ch=1;
+    while (ch==1)
     {
-		cout<<"Enter choice\n1-Enter data\n2-Read from file\n";
-		cin>>choice;
-		switch (choice)
-		{
-		case 1:
-		{
-			Student s;
-			s.getInfo();
-			s.initMarks();
-			s.calcSgpa();
-			addToFile(s);
-			break;
-		}
-		case 2:
-			readFromFile();
-			break;
-		default:
-			cout<<"Invalid choice\n";
-			break;
-		}
-        cout<<"Want to enter more data? y/n"<<endl;
+        Student s;
+        s.getInfo();
+        s.initMarks();
+        s.calcSgpa();
+        s.show();
+        addToFile(s);
+        cout<<"Want to enter more data? 1/0"<<endl;
         cin>>ch;
     } 
     cout<<"---------------------------"<<endl;
