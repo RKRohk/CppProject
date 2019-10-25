@@ -153,5 +153,4 @@ int main(){
    cout<<"\n\n";
    readFromFile();
    cout<<right<<setfill(' ')<<setw(43)<<"End Of Records"<<"\n";
-    return 0;
 }
