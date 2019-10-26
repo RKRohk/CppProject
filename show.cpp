@@ -26,6 +26,7 @@ void show(){
 }
 
 int main(){
+	int midsem,internal,endsem,tot;
 	int choice;
 	cout<<setfill('+')<<setw(70)<<""<<"\n";
 	cout<<setfill(' ')<<setw(53)<<"Welcome to Examination Grading System"<<"\n";
@@ -47,7 +48,29 @@ int main(){
 			case 1:{
 				char ch1='Y', ch2;
 				while (ch1=='Y' || ch1=='y'){
-					cout<<"Entering Marks!"<<endl;
+					jump1:
+		    				cout<<"Enter Midsem Marks: ";
+					    	cin>>midsem;
+					    	if(midsem>20 || midsem <0 ){
+					    		cout<<"catch 1"<<endl;
+					    		goto jump1;
+					    	}
+				        jump2:  		
+					    	cout<<"Enter Internal Marks: ";
+					    	cin>>internal;
+					      	if(internal>30 || internal<0 ){
+					    		cout<<"catch 2"<<endl;
+					    		goto jump2;
+					    	}
+					jump3:
+					    	cout<<"Enter EndSem Marks: ";
+					    	cin>>endsem;
+					    	if(endsem>50 || endsem<0 ){
+					    		cout<<"catch 3"<<endl;
+					    		goto jump3;
+					    	}
+					
+				    	tot = midsem + internal + endsem;
 					cout<<"Write to File? (Y/N)"<<endl;
 					cin>>ch2;
 					if(ch2=='Y' || ch2=='y'){
@@ -58,12 +81,17 @@ int main(){
 				}
 				break;
 				}
-			case 2:
+			case 2:{
 				cout<<"Calculating cgpa"<<endl;
 				break;
-			case 3:
-				cout<<"reading from file"<<endl;
-				break;		
+				}
+			case 3:{
+				cout<<"\n\n";
+   				cout<<right<<setfill(' ')<<setw(46)<<"Printing Records From File"<<"\n";
+   				cout<<"\n\n";
+   				cout<<right<<setfill(' ')<<setw(43)<<"End Of Records"<<"\n";
+   				break;
+				}		
 		}
 	}
 	while(choice!=4);

@@ -32,46 +32,62 @@ class Student{
     }
     float getLab(){
     	float midterm,labfile,viva,endterm;
-    	try{
-	    	cout<<"Enter Midsem Marks: ";
+    	jump1:
+	    	cout<<"Enter Midsem + Daily Evaluation Marks: ";
 	    	cin>>midterm;
-	    	if(midterm>20 || midterm <0 )
-	    		throw midterm;
+	    	if(midterm>50 || midterm <0 ){
+        		cout<<"Marks entered outside accepted range!"<<endl;
+        		goto jump1;
+        	}
+        jump2:
 	    	cout<<"Enter Lab File Marks: ";
 	    	cin>>labfile;
+	    	if(labfile>10 || labfile <0 ){
+        		cout<<"Marks entered outside accepted range!"<<endl;
+        		goto jump2;
+        	}
+        jump3:
 	    	cout<<"Enter Viva Marks: ";
 	    	cin>>viva;
+	    	if(viva>10 || viva<0 ){
+        		cout<<"Marks entered outside accepted range!"<<endl;
+        		goto jump3;
+        	}
+	    jump4:
 		cout<<"Enter Lab Exam Marks: ";    
 		cin>>endterm;
-	}
-	catch (float x){  
-	        cout << "Incorrect Range of marks Entered!";   
-	        }
+		if(endterm>30 || endterm <0 ){
+        		cout<<"Marks entered outside accepted range!"<<endl;
+        		goto jump4;
+        	}
 	return midterm+labfile+endterm+viva;
     }
     float getMarks(){
     	float midsem,internal,endsem,tot;
-    	try{
-    		jump:
-	    	cout<<"Enter Midsem Marks: ";
-	    	cin>>midsem;
-	    	if(midsem>20 || midsem <0 )
-		    		throw midsem;
+    	jump1:
+		    cout<<"Enter Midsem Marks: ";
+        	cin>>midsem;
+        	if(midsem>20 || midsem <0 ){
+        		cout<<"Marks entered outside accepted range!"<<endl;
+        		goto jump1;
+        	}
+        jump2:  		
 	    	cout<<"Enter Internal Marks: ";
 	    	cin>>internal;
-	      	if(internal>30 || internal<0 )
-		    		throw internal;
-	    	cout<<"Enter EndSem Marks: ";
-	    	cin>>endsem;
-	    	if(endsem>50 || endsem<0 )
-		    		throw endsem;
-	    	tot = midsem + internal + endsem;
+	      	if(internal>30 || internal<0 ){
+	    		cout<<"Marks entered outside accepted range!"<<endl;
+	    		goto jump2;
 	    	}
-	catch (float x)  {
-	        cout << "Incorrect Range of marks Entered! "<<endl;
-	        //This catch block breaks input operation..goto doesnt work , need to find solution.
-	        }
-    	return tot;  	
+		jump3:
+		    	cout<<"Enter EndSem Marks: ";
+		    	cin>>endsem;
+		    	if(endsem>50 || endsem<0 ){
+		    		cout<<"Marks entered outside accepted range!"<<endl;
+		    		goto jump3;
+		    	}
+	    tot = midsem + internal + endsem;
+    	return tot;
+    	
     }
     void calcSgpa(){
         //TODO I really don't know how to calculate sgpa. HALP!
@@ -117,6 +133,8 @@ class Student{
     friend void addToFile(const Student &);
     friend void readFromFile();
 };
+class cgpa : 
+
 void addToFile(const Student &s){
     ofstream outFile("Student.txt",ios::app | ios::binary);
     outFile.write((char *)& s, sizeof(s));
