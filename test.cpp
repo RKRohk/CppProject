@@ -106,7 +106,7 @@ class Student{
 	sgpa=obcr/totcr;
     }
     virtual void calcCgpa(){
-        cgpa = (cgpa*2 + sgpa)/3.0;
+		cout<<"You are not supposed to be here"<<endl;
     }
     virtual void show(){
 	cout<<setfill('+')<<setw(70)<<""<<"\n";
