@@ -133,7 +133,7 @@ class Student{
     friend void addToFile(const Student &);
     friend void readFromFile();
 };
-class cgpa : 
+class cgpa;
 
 void addToFile(const Student &s){
     ofstream outFile("Student.txt",ios::app | ios::binary);
