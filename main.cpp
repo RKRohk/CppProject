@@ -2,6 +2,7 @@
 #include<fstream>
 #include<string>
 #include<iomanip> 
+#include<math.h>
 using namespace std;
 string subject[8] = {"Probability and Statistics","Discrete Mathematics","Economics","Object Oriented Programming","Data Structures and Algorithms","Principle of Digital Communication","Data Structures and Algorithms Lab","Object Oriented Programming Lab"};
 class Student{
@@ -16,6 +17,13 @@ class Student{
         cin>>name;
         cout<<"Enter Roll No. : ";
         cin>>rollno;
+        j1:
+	cout<<"Enter Previous CGPA : ";
+	cin>>cgpa;
+	if(cgpa>10 || cgpa <0 || isnan(cgpa) ){
+		cout<<"CPGA entered outside accepted range!"<<endl;
+		goto j1;
+	}
     }
     void initMarks(){
     	cout<<"Enter Marks as defined: \n"<<endl;
@@ -86,11 +94,9 @@ class Student{
 		    		goto jump3;
 		    	}
 	    tot = midsem + internal + endsem;
-    	return tot;
-    	
+    	return tot;   	
     }
     void calcSgpa(){
-        //TODO I really don't know how to calculate sgpa. HALP!
         float obcr=0;    
         int totcr=0;
 	for(int i = 0;i<8;i++)
@@ -104,10 +110,10 @@ class Student{
 		}
 	sgpa=obcr/totcr;
     }
-    void calcCgpa(){
-        cgpa = (cgpa*2 + sgpa)/3.0;
+    virtual void calcCgpa(){
+		cout<<"You are not supposed to be here"<<endl;
     }
-    void show(){
+    virtual void show(){
 	cout<<setfill('+')<<setw(70)<<""<<"\n";
 	cout<<right<<setfill(' ')<<setw(57)<<"KALINGA INSTITUTE OF INDUSTRIAL TECHNOLOGY"<<"\n";
 	cout<<setfill('-')<<setw(70)<<""<<"\n";
@@ -128,20 +134,25 @@ class Student{
 	        }
 	cout<<setfill('-')<<setw(70)<<""<<"\n";
 	cout<<right<<setfill(' ')<<setw(38)<<"SGPA = "<<fixed<<setprecision(2)<<sgpa<<endl;
+	cout<<right<<setfill(' ')<<setw(38)<<"CGPA = "<<fixed<<setprecision(2)<<cgpa<<endl;
 	cout<<setfill('+')<<setw(70)<<""<<"\n";
     }
     friend void addToFile(const Student &);
     friend void readFromFile();
 };
-class cgpa;
-
-void addToFile(const Student &s){
+class cgpa:public Student{
+	public:
+	void calcCgpa(){
+		Student::cgpa = (Student::cgpa*2 + Student::sgpa)/3;
+	}
+};
+void addToFile(const cgpa &s){
     ofstream outFile("Student.txt",ios::app | ios::binary);
     outFile.write((char *)& s, sizeof(s));
     outFile.close();
 }
 void readFromFile(){
-    Student s;
+    cgpa s;
     ifstream inFile("Student.txt",ios::in | ios::binary);
     while (inFile.read((char *)&s,sizeof(s)))
     {
@@ -150,11 +161,17 @@ void readFromFile(){
     }
     inFile.close();
 }
+
+float calcReq(float aim, float ob){
+	float req;
+	req = (aim*3)-(2*ob);
+	return req;
+}
 int main(){
 	int choice;
-	cout<<setfill('+')<<setw(70)<<""<<"\n";
+	cout<<setfill('~')<<setw(70)<<""<<"\n";
 	cout<<setfill(' ')<<setw(53)<<"Welcome to Examination Grading System"<<"\n";
-	cout<<setfill('+')<<setw(70)<<""<<"\n";
+	cout<<setfill('~')<<setw(70)<<""<<"\n";
 	do{
 		cout<<right<<setfill(' ')<<setw(42)<<"Select Your Option:"<<"\n";
 		cout<<left<<setfill(' ')<<setw(30)<<"1. Calculate SGPA";
@@ -164,31 +181,64 @@ int main(){
 		cout<<left<<setfill(' ')<<setw(30)<<"3. Read Records From File";
 		cout<<endl;
 		cout<<left<<setfill(' ')<<setw(30)<<"4. Exit";
-		cout<<"\n"<<endl;
+		cout<<endl;
+		cout<<setfill('~')<<setw(70)<<""<<"\n\n";
 		cout<<left<<setfill(' ')<<setw(15)<<"Your Choice:";
 		cin>>choice;
+		if(!choice){
+			cout<<"Please Don't Enter a Character"<<endl;
+			break;
+		}
 		switch(choice){
 			case 1:{
+				cout<<setfill('_')<<setw(70)<<""<<"\n\n";
 				char ch1='Y', ch2;
 				while (ch1=='Y' || ch1=='y'){
-					Student s;
-					s.getInfo();
-					s.initMarks();
-					s.calcSgpa();
-					s.show();
+					cgpa c;
+					Student *s = &c;
+					s->getInfo();
+					s->initMarks();
+					s->calcSgpa();
+					s->calcCgpa();
+					s->show();
 					cout<<"Write to File? (Y/N)"<<endl;
 					cin>>ch2;
 					if(ch2=='Y' || ch2=='y'){
 						cout<<"Writing to file!"<<endl;
-						addToFile(s);
+						addToFile(c);
 					}
+					cout<<setfill('-')<<setw(70)<<""<<"\n";
 					cout<<"Want to enter more data?(Y/N)"<<endl;
 					cin>>ch1;
 				}
+				cout<<setfill('_')<<setw(70)<<""<<"\n\n";
 				break;
 				}
 			case 2:{
-				cout<<"Calculating cgpa"<<endl;
+				float cgpa,aim,req;
+				cout<<setfill('_')<<setw(70)<<""<<"\n\n";
+				j1:
+					cout<<"Enter Previous CGPA : ";
+					cin>>cgpa;
+					if(cgpa>10 || cgpa <0 ){
+						cout<<"CPGA entered outside accepted range!"<<endl;
+						goto j1;
+					}
+				j2:
+					cout<<"Enter Expected CGPA : ";
+					cin>>aim;
+					if(aim>10 || aim <0 ){
+						cout<<"CPGA entered outside accepted range!"<<endl;
+						goto j2;
+					}
+				req = calcReq(aim,cgpa);
+				cout<<endl;
+				if(req>10){
+					cout<<right<<setfill(' ')<<setw(45)<<"Required SGPA beyond 10"<<endl;
+				}
+				else
+					cout<<right<<setfill(' ')<<setw(38)<<"Required SGPA = "<<fixed<<setprecision(2)<<req<<endl;
+				cout<<setfill('_')<<setw(70)<<""<<"\n\n";
 				break;
 				}
 			case 3:{
@@ -197,6 +247,7 @@ int main(){
    				cout<<"\n\n";
 				readFromFile();
    				cout<<right<<setfill(' ')<<setw(43)<<"End Of Records"<<"\n\n";
+   				cout<<setfill('_')<<setw(70)<<""<<"\n\n";
    				break;
 				}		
 		}
