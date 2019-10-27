@@ -3,27 +3,31 @@
 #include<string>
 #include<iomanip> 
 #include<math.h>
+#include<limits>
+#include<stdio.h>
 using namespace std;
 string subject[8] = {"Probability and Statistics","Discrete Mathematics","Economics","Object Oriented Programming","Data Structures and Algorithms","Principle of Digital Communication","Data Structures and Algorithms Lab","Object Oriented Programming Lab"};
 class Student{
     protected:
-    char name[20];
+    char name[30];
     int credits[8]={3,3,3,3,4,4,1,1};
     float sgpa,cgpa,marks[8];
     int rollno,grade[8];
     public:
     void getInfo(){
-        cout<<"Enter name : ";
-        cin>>name;
-        cout<<"Enter Roll No. : ";
+        cout<<"Enter name: \n";
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cin.clear();
+        cin.getline(name,30);
+        cout<<endl<<"Enter Roll No. : ";
         cin>>rollno;
         j1:
-	cout<<"Enter Previous CGPA : ";
-	cin>>cgpa;
-	if(cgpa>10 || cgpa <0 || isnan(cgpa) ){
-		cout<<"CPGA entered outside accepted range!"<<endl;
-		goto j1;
-	}
+			cout<<"Enter Previous CGPA : ";
+			cin>>cgpa;
+			if(cgpa>10 || cgpa <0 || isnan(cgpa)){
+				cout<<"CPGA entered outside accepted range!"<<endl;
+				goto j1;
+			}
     }
     void initMarks(){
     	cout<<"Enter Marks as defined: \n"<<endl;
@@ -185,9 +189,12 @@ int main(){
 		cout<<setfill('~')<<setw(70)<<""<<"\n\n";
 		cout<<left<<setfill(' ')<<setw(15)<<"Your Choice:";
 		cin>>choice;
+		std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		if(!choice){
 			cout<<"Please Don't Enter a Character"<<endl;
-			break;
+			choice = 0;
+			continue;
 		}
 		switch(choice){
 			case 1:{
@@ -249,7 +256,9 @@ int main(){
    				cout<<right<<setfill(' ')<<setw(43)<<"End Of Records"<<"\n\n";
    				cout<<setfill('_')<<setw(70)<<""<<"\n\n";
    				break;
-				}		
+				}
+			default:
+				break;		
 		}
 	}
 	while(choice!=4);
