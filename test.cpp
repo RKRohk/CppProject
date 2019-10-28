@@ -15,12 +15,12 @@ class Student{
     int rollno,grade[8];
     public:
     void getInfo(){
-        cout<<"Enter name: \n";
-		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		cin.clear();
-        cin.getline(name,30);
+        cout<<"Enter name: ";
+        fgets(name,30,stdin);
         cout<<endl<<"Enter Roll No. : ";
         cin>>rollno;
+		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+		cin.clear();
         j1:
 			cout<<"Enter Previous CGPA : ";
 			cin>>cgpa;
