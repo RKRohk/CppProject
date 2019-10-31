@@ -17,14 +17,12 @@ protected:
 
 public:
 	void getInfo()
-	{
+	{	system("clear");
 		cout << "Enter name: ";
 		fgets(name, 30, stdin);
 		cout << endl
 			 << "Enter Roll No. : ";
 		cin >> rollno;
-		cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		cin.clear();
 	j1:
 		cout << "Enter Previous CGPA : ";
 		cin >> cgpa;
@@ -246,6 +244,7 @@ int main()
 			choice = 0;
 			continue;
 		}
+		system("clear");
 		switch (choice)
 		{
 		case 1:
@@ -261,6 +260,7 @@ int main()
 				s->initMarks();
 				s->calcSgpa();
 				s->calcCgpa();
+				system("clear");
 				s->show();
 				cout << "Write to File? (Y/N)" << endl;
 				cin >> ch2;
@@ -273,6 +273,8 @@ int main()
 					 << "\n";
 				cout << "Want to enter more data?(Y/N)" << endl;
 				cin >> ch1;
+				cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+				cin.clear();
 			}
 			cout << setfill('_') << setw(70) << ""
 				 << "\n\n";
@@ -314,6 +316,7 @@ int main()
 		case 3:
 		{
 			cout << "\n\n";
+			system("clear");
 			cout << right << setfill(' ') << setw(46) << "Printing Records From File"
 				 << "\n";
 			cout << "\n\n";
