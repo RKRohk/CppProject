@@ -228,7 +228,7 @@ int main()
 			 << "\n";
 		cout << left << setfill(' ') << setw(30) << "1. Calculate SGPA";
 		cout << endl;
-		cout << left << setfill(' ') << setw(30) << "2. Calculate CGPA";
+		cout << left << setfill(' ') << setw(30) << "2. Estimate SGPA";
 		cout << endl;
 		cout << left << setfill(' ') << setw(30) << "3. Read Records From File";
 		cout << endl;
